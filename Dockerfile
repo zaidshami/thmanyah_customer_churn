@@ -9,5 +9,7 @@ COPY ./app ./app
 COPY ./artifacts ./artifacts
 COPY prestart.sh ./prestart.sh
 
-RUN chmod +x prestart.sh
-CMD ["./prestart.sh"]
+CMD ["python", "main.py"]
+
+# RUN chmod +x prestart.sh
+# CMD ["./prestart.sh"]
