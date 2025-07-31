@@ -11,17 +11,17 @@ echo "[1/5] Authenticating with ECR..."
 aws ecr get-login-password --region $REGION | \
 docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
-# ---- BUILD DOCKER IMAGE ----
-echo "[2/5] Building Docker image..."
-docker build -t $REPO_NAME .
-
-# ---- TAG IMAGE FOR ECR ----
-echo "[3/5] Tagging Docker image..."
-docker tag $REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
-
-# ---- PUSH TO ECR ----
-echo "[4/5] Pushing image to ECR..."
-docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
+## ---- BUILD DOCKER IMAGE ----
+#echo "[2/5] Building Docker image..."
+#docker build -t $REPO_NAME .
+#
+## ---- TAG IMAGE FOR ECR ----
+#echo "[3/5] Tagging Docker image..."
+#docker tag $REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
+#
+## ---- PUSH TO ECR ----
+#echo "[4/5] Pushing image to ECR..."
+#docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
 
 # ---- RUN CONTAINER ----
 echo "[5/5] Running container on port $PORT..."
