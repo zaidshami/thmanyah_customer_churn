@@ -17,7 +17,7 @@ def predict(request: InferenceRequest):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.post("/test-endpoint")
+@app.post("/test_endpoint")
 def test_endpoint():
     return {
             "status": "hi zaid",
