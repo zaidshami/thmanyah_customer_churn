@@ -6,20 +6,20 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 767397763254.dkr.ecr.ap-south-1.amazonaws.com
-      - REPO_URI=public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
+      - REPO_URI=767397763254.dkr.ecr.ap-south-1.amazonaws.com/thmanyah-container
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
 
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t thamanyah-repo .
-      - docker tag thamanyah-repo:latest public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
+      - docker build -t $REPO_URI:$IMAGE_TAG .
+      - docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:latest
 
   post_build:
     commands:
       - echo Pushing Docker image...
-      - docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
-#      - docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
+      - docker push $REPO_URI:$IMAGE_TAG
+      - docker push $REPO_URI:latest
       - echo Writing image definitions...
       - printf '[{"name":"churn-fastapi","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
 
