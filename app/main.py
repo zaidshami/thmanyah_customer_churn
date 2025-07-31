@@ -3,6 +3,7 @@ from app.schemas import InferenceRequest, InferenceResponse
 from app.utils import preprocess_input
 from app.model import model
 import numpy as np
+import subprocess
 
 app = FastAPI()
 
@@ -15,3 +16,24 @@ def predict(request: InferenceRequest):
         return InferenceResponse(prediction=int(prediction), probability=probability)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/rebuild-image")
+def rebuild_image():
+    try:
+        result = subprocess.run(
+            ["bash", "/home/ec2-user/deploy_churn_api.sh"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        return {
+            "status": "success",
+            "stdout": result.stdout
+        }
+    except subprocess.CalledProcessError as e:
+        return {
+            "status": "error",
+            "stdout": e.stdout,
+            "stderr": e.stderr
+        }
