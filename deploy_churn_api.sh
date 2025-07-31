@@ -3,7 +3,7 @@
 # ---- CONFIG ----
 ACCOUNT_ID="767397763254"
 REGION="ap-south-1"
-REPO_NAME="thmanyah-container"
+REPO_NAME="thamanyah-repo"
 PORT=8000
 
 # ---- AUTHENTICATE WITH ECR ----
