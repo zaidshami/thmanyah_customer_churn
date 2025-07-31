@@ -19,7 +19,7 @@ phases:
     commands:
       - echo Pushing Docker image...
       - docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
-      - docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
+#      - docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
       - echo Writing image definitions...
       - printf '[{"name":"churn-fastapi","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
 

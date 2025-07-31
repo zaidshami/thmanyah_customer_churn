@@ -11,4 +11,4 @@ docker rm myapp || true
 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 767397763254.dkr.ecr.ap-south-1.amazonaws.com
 
 # Run latest image
-docker run -d --name myapp -p 80:80 767397763254.dkr.ecr.ap-south-1.amazonaws.com/thamanyah-repo:latest
+docker run -d --name myapp -p 80:80 public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
