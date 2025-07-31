@@ -13,15 +13,15 @@ docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazona
 
 # ---- BUILD DOCKER IMAGE ----
 echo "[2/5] Building Docker image..."
-docker build -t $REPO_NAME .
+docker build -t thamanyah-repo .
 
 # ---- TAG IMAGE FOR ECR ----
 echo "[3/5] Tagging Docker image..."
-docker tag $REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
+docker tag thamanyah-repo:latest public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
 
 # ---- PUSH TO ECR ----
 echo "[4/5] Pushing image to ECR..."
-docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
+docker push public.ecr.aws/e1j8m7p9/thamanyah-repo:latest
 
 # ---- RUN CONTAINER ----
 echo "[5/5] Running container on port $PORT..."
