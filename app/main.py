@@ -4,6 +4,7 @@ from app.utils import preprocess_input
 from app.model import model
 import numpy as np
 import subprocess
+import uvicorn
 
 app = FastAPI()
 
@@ -44,3 +45,6 @@ def rebuild_image():
             "stdout": e.stdout,
             "stderr": e.stderr
         }
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
