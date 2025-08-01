@@ -1,5 +1,7 @@
 # evaluate.py
 
+import subprocess
+subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
 import argparse
 import os
 import json
@@ -8,8 +10,6 @@ import xgboost as xgb
 from sklearn.metrics import roc_auc_score
 
 
-import subprocess
-subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
 
 def main():
     parser = argparse.ArgumentParser()
