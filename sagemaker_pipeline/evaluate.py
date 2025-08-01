@@ -8,6 +8,7 @@ import json
 import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import roc_auc_score
+import tarfile
 
 
 
@@ -17,6 +18,11 @@ def main():
     parser.add_argument('--test_data', type=str, required=True)
     parser.add_argument('--output_dir', type=str, required=True)
     args = parser.parse_args()
+
+    model_tar_path = os.path.join(args.model_dir, "model.tar.gz")
+    if os.path.exists(model_tar_path):
+        with tarfile.open(model_tar_path) as tar:
+            tar.extractall(path=args.model_dir)
 
     # Load model
     model = xgb.Booster()
