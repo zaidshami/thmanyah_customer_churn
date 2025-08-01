@@ -7,6 +7,10 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import roc_auc_score
 
+
+import subprocess
+subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_dir', type=str, required=True)
