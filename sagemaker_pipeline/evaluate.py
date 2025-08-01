@@ -2,7 +2,8 @@
 
 import subprocess
 # subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
-subprocess.check_call(["pip", "install", "--quiet", "xgboost==1.7.6", "pandas==1.5.3", "scikit-learn==1.2.2", "numpy==1.23.5"])
+subprocess.check_call(["pip", "install", "--quiet", "xgboost==1.7.6", "pandas==1.5.3",
+                       "scikit-learn==1.2.2", "numpy==1.23.5","--force-reinstall"])
 
 import argparse
 import os
