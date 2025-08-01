@@ -1,7 +1,9 @@
 # evaluate.py
 
 import subprocess
-subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
+# subprocess.check_call(["pip", "install", "xgboost", "scikit-learn", "--quiet"])
+subprocess.check_call(["pip", "install", "--quiet", "xgboost>=1.6.0", "pandas>=2.0.0", "scikit-learn"])
+
 import argparse
 import os
 import json
