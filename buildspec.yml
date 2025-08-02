@@ -23,5 +23,11 @@ phases:
       - echo Writing image definitions...
       - printf '[{"name":"churn-fastapi","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
 
+#artifacts:
+#  files: imagedefinitions.json
 artifacts:
-  files: imagedefinitions.json
+  files:
+    - appspec.yml
+    - deploy_churn_api.sh
+    - scripts/**/*
+    - imagedefinitions.json

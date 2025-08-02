@@ -7,6 +7,6 @@ files:
 
 hooks:
   AfterInstall:
-    - location: scripts/deploy_churn_api.sh
+    - location: deploy_churn_api.sh
       timeout: 300
       runas: ec2-user
