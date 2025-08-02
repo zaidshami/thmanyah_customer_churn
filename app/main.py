@@ -6,6 +6,7 @@ import numpy as np
 import subprocess
 import uvicorn
 from pydantic import BaseModel
+from typing import List, Dict, Any
 import boto3
 import json
 
@@ -17,7 +18,7 @@ sagemaker_client = boto3.client("sagemaker-runtime", region_name="us-east-1")  #
 ENDPOINT_NAME = "churn-endpoint"
 
 class InferenceInput(BaseModel):
-    features: list  # or dict, depending on your model input
+    instances: List[Dict[str, Any]]
 
 @app.post("/predict")
 def predict(input: InferenceInput):
