@@ -20,7 +20,7 @@ docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
 echo "[3/3] Running container on port $PORT..."
 docker stop $CONTAINER_NAME || true
 docker rm $CONTAINER_NAME || true
-docker run -d --name $CONTAINER_NAME -p 80:$PORT $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
+docker run -d --name $CONTAINER_NAME -p 8080:$PORT  $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
 docker update --restart=always $CONTAINER_NAME
 
 echo "✅ Deployment complete. API running on port 80 → http://<EC2_PUBLIC_IP>/predict"
