@@ -50,7 +50,7 @@ def main():
         }
     }
 
-    with open(os.path.join(args.output_dir, "metrics.json"), "w") as f:
+    with open(os.path.join(args.output_dir, "evaluation.json"), "w") as f:
         json.dump(metrics, f)
 
 if __name__ == "__main__":
