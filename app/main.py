@@ -24,7 +24,7 @@ class InferenceInput(BaseModel):
 def predict(input: InferenceInput):
     try:
         # Prepare input payload
-        payload = json.dumps(input.features)
+        payload = json.dumps({"instances": input.instances})
 
         # Call SageMaker endpoint
         response = sagemaker_client.invoke_endpoint(
