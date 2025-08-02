@@ -12,6 +12,7 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.metrics import roc_auc_score
 import tarfile
+from sklearn.metrics import recall_score
 
 
 
@@ -38,17 +39,34 @@ def main():
 
     dval = xgb.DMatrix(X)
     preds = model.predict(dval)
+    preds_proba = model.predict(dval)
 
-    auc = roc_auc_score(y, preds)
-    print(f"Evaluation AUC: {auc:.4f}")
+
+
+    # Convert probabilities to binary predictions
+    preds_binary = [1 if p >= 0.5 else 0 for p in preds_proba]
+
+    # Calculate recall
+    recall = recall_score(y, preds_binary)
+    print(f"validation:recall={recall:.4f}")  # ✅ for SageMaker metric parsing
 
     # Output metrics for SageMaker pipeline
     os.makedirs(args.output_dir, exist_ok=True)
     metrics = {
         "metrics": {
-            "auc": auc
+            "recall": recall
         }
     }
+    # auc = roc_auc_score(y, preds)
+    # print(f"Evaluation AUC: {auc:.4f}")
+    #
+    # # Output metrics for SageMaker pipeline
+    # os.makedirs(args.output_dir, exist_ok=True)
+    # metrics = {
+    #     "metrics": {
+    #         "auc": auc
+    #     }
+    # }
 
     with open(os.path.join(args.output_dir, "evaluation.json"), "w") as f:
         json.dump(metrics, f)

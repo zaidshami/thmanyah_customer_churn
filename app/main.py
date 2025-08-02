@@ -1,13 +1,8 @@
 from fastapi import FastAPI, HTTPException
-# from app.schemas import InferenceRequest, InferenceResponse
-# from app.utils import preprocess_input
-# from app.model import model
 import numpy as np
-import subprocess
 import uvicorn
 
 import boto3
-import json
 
 from app.model import InferenceInput
 
