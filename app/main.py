@@ -55,7 +55,7 @@ def predict(input: InferenceInput):
 @app.post("/test_endpoint")
 def test_endpoint():
     return {
-            "status": "hi zaid",
+            "status": "hi zaid2",
 
         }
 
