@@ -23,22 +23,56 @@ class InferenceInput(BaseModel):
 @app.post("/predict")
 def predict(input: InferenceInput):
     try:
-        # Prepare input payload
-        payload = json.dumps({"instances": input.instances})
+        # Extract the first instance only (you can loop if needed)
+        features = input.instances[0]
 
-        # Call SageMaker endpoint
+        # Order matters — ensure the same order used during model training
+        feature_values = [
+            features["num_sessions"],
+            features["num_songs_played"],
+            features["num_thumbs_up"],
+            features["num_thumbs_down"],
+            features["num_add_friend"],
+            features["avg_songs_per_session"],
+            features["gender"],
+            features["level"],
+            features["registration_days"]
+        ]
+
+        # Convert to CSV string (no header)
+        payload = ",".join(map(str, feature_values))
+
         response = sagemaker_client.invoke_endpoint(
             EndpointName=ENDPOINT_NAME,
-            ContentType="application/json",  # or "text/csv" if your model expects CSV
+            ContentType="text/csv",
             Body=payload
         )
 
-        # Parse response
         result = response["Body"].read().decode("utf-8")
         return {"prediction": result}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
+
+# @app.post("/predict")
+# def predict(input: InferenceInput):
+#     try:
+#         # Prepare input payload
+#         payload = json.dumps({"instances": input.instances})
+#
+#         # Call SageMaker endpoint
+#         response = sagemaker_client.invoke_endpoint(
+#             EndpointName=ENDPOINT_NAME,
+#             ContentType="application/json",  # or "text/csv" if your model expects CSV
+#             Body=payload
+#         )
+#
+#         # Parse response
+#         result = response["Body"].read().decode("utf-8")
+#         return {"prediction": result}
+#
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
 
 #
 #
